@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 실습</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=Jua&family=Poor+Story&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body, h1, h2, p, ul, table{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            font-family: "Poor Story", system-ui;
+            font-size: 18px;
+            background-color: #f8f5f2;
+            line-height: 1.6;
+        }
+        .container{
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 20px;
+        }
+        header{
+            text-align: center;
+            margin-bottom: 50px;
+            background-color: rgb(219, 183, 252);
+            border-radius: 20px;
+        }
+        h1{
+            font-size: 40px;
+            font-weight: bolder;
+            color: black;
+            margin-bottom: 20px;
+        }
+        h2{
+            margin-top: 40px;
+            margin-left: 20px;
+            border-bottom: 5px solid darkgrey;
+        }
+        .link-list{
+            font-size: 20px;
+            margin: 40px 20px;
+        }
+        .skill{
+            border: 1px solid gray;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 20px;
+            background-color: rgb(110, 110, 236);
+            font-weight: bolder;
+        }
+        .skill-list{
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        table{
+            width: 90%;
+            margin: 20px auto;
+            border: 2px solid black;
+        }
+        th, td{
+            text-align: center;
+            border: 1px solid black;
+            padding: 10px;
+        }
+        table, th, td{
+            border-collapse: collapse;
+        }
+        thead tr{
+            background-color: rgb(189, 189, 189)
+        }
+        .form-group{
+            position: relative;
+            grid-template-columns: 1fr;
+            margin: 5px;
+        }
+        #user-name, #user-pw, #memo{
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #memo{
+            height: 100px;
+        }
+        .form-map{
+            display: flex;
+            justify-content:center;
+            align-items: center;
+        }
+        .hobby-list{
+                        display: flex;
+            justify-content:center;
+            align-items: center;
+        }
+        #route-internet, #route-friend, #route-news{
+            margin: 10px;
+        }
+        #hobby-html, #hobby-css, #hobby-js{
+            margin: 10px;
+        }
+        audio{
+            width: 90%;
+            margin: 20px auto;
+        }
+        footer{
+            text-align: center;
+        }
+        .button-submit{
+            display: flex;
+            justify-content: flex-end; /* 오른쪽 정렬 */
+            margin-top: 10px;
+        }
+        .button-submit button{
+            padding: 15px 30px; /* 버튼 크기 */
+            font-size: 18px;
+            border-radius: 10px;
+            background-color: #b275eb;
+            color: white;
+            border: none;
+        }
+
+        .form-group input:hover, .form-group textarea:hover{
+            background-color: rgb(218, 218, 218);
+        }
+        .img-list{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+        figcaption{
+            text-align: center;
+        }
+        .audio-list{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+        }
+        form{
+            margin: 20px;
+        }
+        section{
+            border: 10px solid;
+            border-image: linear-gradient(to right, rgb(248, 248, 248), rgb(233, 233, 233)) 1;
+            border-radius: 20px;
+        }
+        .button-top{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .button-top button{
+            background-color: #b275eb;
+            width: 120px;
+            height: 60px;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+        }
+        .button-top button:hover{
+            transform: translateY(-10px);
+            background-color: #7536af;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+        }
+        .button-top button a{
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="guest">홍길동 (Gildong Hong)</h1>
+            <p>
+                안녕하세요! 성장을 즐기는 예비 개발자 <strong>홍길동</strong>입니다.<br>
+                <em>"배움에는 끝이 없다"</em>는 말을 좋아합니다.
+            </p>
+        </header>
+
+        <main>
+            <section>
+                <span>
+                    <h2>📚 보유 기술 (Skills)</h2>
+                </span>
+                <ul class="skill-list">
+                    <li class="skill html">HTML5</li>
+                    <li class="skill css">CSS3</li>
+                    <li class="skill js">JavaScript</li>
+                </ul>
+            </section>
+            <section>
+                <h2>⏰ 시간표 (Schedule)</h2>
+                <table>
+                    <caption>2025년 1학기 시간표</caption>
+                    <thead>
+                    <tr>
+                        <th>시간</th>
+                        <th>월요일</th>
+                        <th >수요일</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>1교시</th>
+                        <td>웹 프로그래밍 기초</td>
+                        <td rowspan="2">자료 구조</td>
+                    </tr>
+                    <tr>
+                        <th>2교시</th>
+                        <td>웹 프로그래밍 기초</td>
+                        
+                    </tbody>
+                    </tr>
+                </table>
+            </section>
+
+            <section>
+                <h2>👍 좋아하는 사진</h2>
+                <figure>
+                    <div class="img-list">
+                        <img src="sample/image/flower2.PNG" alt="민들래꽃" width="300" height="200">
+                    </div>
+                        <figcaption>제가 가장 좋아하는 샘플 이미지입니다</figcaption>
+                </figure>
+            </section>
+            <section>
+                <h2>🎵 좋아하는 음악</h2>
+                <div class="audio-list">
+                    <audio src="sample/audio/major.mp3" controls></audio>
+                </div>
+            </section>
+            <section>
+                <h2>🔗 관련 링크 (Links)</h2>
+                <p class="link-list">저의 포트폴리오를 더 보고 싶다면 <b><a href="https://github.com/nubo92" target="_blank">제 깃허브</a></b>를 방문해주세요.</p>
+            </section>
+
+            <section>
+                <h2>📑 방명록 (guestbook)</h2>
+                <form action="#" method="get">
+                <fieldset>
+                    <legend>방명록 남기기</legend>
+                    <div class="form-group">
+                        <div class="Name">
+                            <label for="user-name" name="userName">이 름 :</label>
+                            <input type="text" id="user-name" name="userName" placeholder="이름을 입력하세요">
+                        </div>
+                        <div class="password">
+                            <label for="user-pw" name="userPw">비밀번호 :</label>
+                            <input type="password" id="user-pw" name="userPw" placeholder="비밀번호를 입력하세요">
+                        </div>
+                            <div class="Memo">
+                            <label for="memo" name="memo">내 용 : </label>
+                            <textarea name="memo" id="memo" rows="5" placeholder="내용을 입력하세요"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <p>가입 경로(하나만 선택) : </p>
+                        <div class="form-map">
+                            <input type="radio" id="route-internet" name="route" value="internet">
+                            <label for="route-internet">인터넷 검색
+                            <input type="radio" id="route-friend" name="route" value="friend">
+                            <label for="route-friend">지인 추천</label>
+                            <input type="radio" id="route-news" name="route" value="news">
+                            <label for="route-news">소식 추천</label>
+                        </div>
+                    <div>
+                        <p>관심 분야(여러개 선택 가능) :</p>
+                        <div class="hobby-list">
+                            <input type="checkbox" id="hobby-html" name="hobby" value="html">
+                            <label for="hobby-html">HTML</label>
+                            <input type="checkbox" id="hobby-css" name="hobby" value="css">
+                            <label for="hobby-css">CSS</label>
+                            <input type="checkbox" id="hobby-js" name="hobby" value="js">
+                            <label for="hobby-js">JavaScript</label>
+                        </div>
+                    </div>
+                    <div class="button-submit">
+                        <button type="submit">남기기</button>
+                    </div>
+                </fieldset>
+                </form>
+            </section>
+        </main>
+        <hr>
+        <footer>
+            <p>Copyright 2025 Gildong Hong. All rights reserved.</p>
+        </footer>
+        <hr>
+        <div class="button-top">
+            <button><a href="#guest">TOP</a></button>
+        </div>
+    </div>
+</body>
+</html>

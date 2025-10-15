@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root" 
+        style="background-color: lightgray;"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function Header() {
+            return (
+                <>
+                    <h1
+                        style={{
+                            backgroundColor: 'black',
+                            color: 'white',
+                            padding: '30px',
+                            textAlign: 'center'
+                        }}>
+                    오늘의 할일! 2025.10.14
+                    </h1>
+                    <p
+                        style ={{
+                            textAlign: 'center',
+                            fontWeight: 'bold',
+                            fontSize: '20px',
+                            
+                        }}>
+                        ToDo-list
+                    </p>
+                </>
+            )
+        }
+
+        // 자식 컴포넌트
+        function TodoItem() {
+            return (
+                <>
+                
+                </>
+            )
+        }
+
+        function TodoList() {
+
+            return (
+                <>
+                    <TodoItem />
+                    <input 
+                        type="text"
+                    
+                    />
+                    <button style={{
+                        backgroundColor: 'green',
+                        color: 'white',
+                        padding: '5px 5px',
+                        borderRadius: '5px',
+                        border: 'none',
+                    }}>추가하기</button>
+                </>
+            )
+        }
+
+        function Content() {
+            return (
+                <>
+                    <TodoList />
+                </>
+            )
+        }
+
+        function Footer() {
+            return (
+                <p style={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                    padding: '40px',
+                    textAlign: 'center'
+                }}>
+                Copyright2025.team-ohgiraffers all rights reserved.
+                </p>
+            )
+        }
+
+        function TodoApp() {
+            return (
+                <>
+                    <div>
+                        <Header />
+                        <Content />
+                        <Footer />
+                    </div>
+                </>
+            );
+        }
+
+
+
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<TodoApp />);
+
+    </script>
+</body>
+</html>

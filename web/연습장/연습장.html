@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>중급 6: 요소 통째로 교체</title>
+</head>
+<body>
+    <h1>판매 과일 목록</h1>
+    <ul id="fruit-list">
+        <li>사과</li>
+        <li id="old-item">수박</li> 
+        <li>포도</li>
+    </ul>
+
+<script>
+    const $list = document.querySelector('#fruit-list');     // 부모 요소
+    const $oldItem = document.querySelector('#old-item');   // 교체될 기존 요소 (수박)
+
+    // 1. 메모리에 새로운 <li> 요소를 생성하고, 텍스트 내용을 "체리"로 설정하여 $newItem 변수에 저장합니다.
+    const $newItem = document.createElement('li');
+    $newItem.textContent = '체리';
+    
+    // 2. $list(부모 요소)를 사용하여 $oldItem(수박)을 $newItem(체리)로 교체하는 코드를 작성해주세요.
+
+    $list.replaceChild($newItem, $oldItem);
+
+</script>
+</body>
+</html>
