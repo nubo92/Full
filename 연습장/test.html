@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- 깃 허브 이모지 api : 'https://api.github.com/emojis' -->
+
+    <script type="text/babel">
+
+        const { useState, useEffect, useMemo } = React;
+
+        const API_URL = 'https://api.github.com/emojis'
+
+        function SearchBox({query, setQuery, onSearch}) {
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                onSearch(query);
+            }
+            
+            return (
+                <>
+                    <form onSubmit={handleSubmit}>
+                        <input 
+                            type="text"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            />
+                        <button type="submit">검색</button>
+                    </form>
+                </>
+            );
+        }
+
+        function ImageBox({items}) {
+            if(!items.length) return null;
+            return (
+                <>
+                    {items.map(({ name, url}) => (
+                        <div key={name}>
+                            <img src={url} alt={name} width='110' heght='110' />
+                        </div>
+                    ))}
+                </>
+            );
+        }
+
+        // 모든 데이터와 상태(전체 이모지 목록, 검색 결과 URL)를 관리
+        // API 통신을 책임지고, 자식들의 행동에 따라 상태를 업데이트
+        function App () {
+            const [allEmojis, setAllEmojis] = useState([]);
+            const [query, setQuery] = useState('');
+            const [searchText, setSearchText] = useState('');
+            const [loading, setLoading] = useState(false);
+
+            useEffect(() => {
+            (async () => {
+                try {
+                const res = await fetch(API_URL);
+                const data = await res.json();
+                const list = Object.entries(data).map(([name, url]) => ({ name, url }));
+                setAllEmojis(list);
+                } catch {
+                setAllEmojis([]);
+                }
+            })();
+            }, []);
+
+            useEffect(() => {
+            if (!searchText) return;
+            setLoading(true);
+            const timer = setTimeout(() => setLoading(false), 300);
+            return () => clearTimeout(timer);
+            }, [searchText]);
+
+            const filtered = allEmojis.filter(
+            (e) => e.name.toLowerCase() === searchText.trim().toLowerCase()
+            );
+
+            return (
+            <>
+                <h1>이모지 검색기</h1>
+                <SearchBox query={query} setQuery={setQuery} onSearch={setSearchText} />
+
+                {loading ? (
+                <p>로딩중..</p>
+                ) : searchText === '' ? (
+                <p>이모지를 검색해주세요</p>
+                ) : filtered.length === 0 ? (
+                <p>해당 이모지는 없습니다.</p>
+                ) : (
+                <ImageBox items={filtered} />
+                )}
+            </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+</body>
+</html>

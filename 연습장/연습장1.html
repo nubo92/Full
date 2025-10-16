@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>useCallback + memo 최적화 예제</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -12,26 +12,52 @@
     <div id="root"></div>
 
     <script type="text/babel">
+        const { useState, useCallback } = React;
 
-        const user = {
-            name: '홍길동',
-            age: 25
+        // ------------------------------
+        // 자식 컴포넌트
+        // ------------------------------
+        const ActionPanel = React.memo(function ActionPanel({ onIncrease }) {
+        console.log('🧩 ActionPanel 렌더');
+        return <button onClick={onIncrease}>증가</button>;
+        });
+
+        // ------------------------------
+        // 부모 컴포넌트
+        // ------------------------------
+        function CounterBox() {
+        console.log('📦 CounterBox 렌더');
+
+        const [count, setCount] = useState(0);
+        const [theme, setTheme] = useState('light');
+
+        // 콜백을 useCallback으로 메모화 → 의존성 없음(함수형 업데이트)
+        const onIncrease = useCallback(() => {
+            setCount((c) => c + 1);
+        }, []);
+
+        // 테마 토글
+        const toggleTheme = () => {
+            setTheme((t) => (t === 'light' ? 'dark' : 'light'));
         };
 
-        function UserInfo({user}) {
-            return (
-                <p>안녕하세요, 저는 {user.name}이고 {user.age}세 입니다.</p>
-            )
-        };
+        return (
+            <>
+            <h1>count: {count}</h1>
+            <p>theme: {theme}</p>
 
-        function App() {
-            return(
-                <UserInfo user={user}/>
-            );
+            <button onClick={toggleTheme}>테마 토글</button>
+            <br /><br />
+
+            <ActionPanel onIncrease={onIncrease} />
+            </>
+        );
         }
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-
+        // ------------------------------
+        // 렌더링 시작
+        // ------------------------------
+        ReactDOM.createRoot(document.getElementById('root')).render(<CounterBox />);
     </script>
 </body>
 </html>
