@@ -1,0 +1,17 @@
+.header {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 28px;
+    border-bottom: 2px solid white;
+}
+.footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    padding: 35px;
+
+}
