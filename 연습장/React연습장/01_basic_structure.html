@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>React 구조 이해</title>
+    <!-- React 핵심 라이브러리 -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- JSX 문법을 해석하기 위한 Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <!-- React가 붙을 위치 -->
+    <div id="root"></div>
+
+    <!-- Babel로 JSX를 해석하도록 type 지정 -->
+    <script type="text/babel">
+        // 1️⃣ 함수형 컴포넌트 선언
+        function Hello() {
+            return <h1>안녕하세요, React!</h1>;
+        }
+
+        // 2️⃣ root에 컴포넌트를 연결
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<Hello />);
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function Counter() { /* 새로운 컴포넌트 선언*/
+            let count = 0;  /* 수정가능한 count에 0 할당*/
+
+            function hanbleClick() {  // 클릭 했을때 수행될 함수
+                count ++;  // count에 1 더하기
+                console.log('현재 count:', count);
+            }
+            return(
+                <div>
+                    <h1>숫자: {count}</h1>
+                    <button onClick={hanbleClick}>+1</button>    
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Counter />);
+
+    </script>
+</body>
+</html>
