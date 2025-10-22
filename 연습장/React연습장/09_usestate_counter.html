@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; padding: 40px; background:#f7f7f7; }
+        .card { max-width: 360px; margin: 0 auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        h1 { font-size: 20px; margin: 0 0 12px; }
+        .count { font-size: 40px; font-weight: 700; margin: 8px 0 20px; }
+        .row { display: flex; gap: 10px; }
+        button { flex: 1; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 10px; background: #f3f4f6; cursor: pointer; font-size: 16px; }
+        button:hover { background: #e5e7eb; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hint { margin-top: 14px; color: #6b7280; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const {useState } = React;
+
+        function Counter() {
+            const [ count, setCount] = useState(0);
+
+            const handleIncrease = () => {
+                if(count < 10) {
+                    setCount(prev => Math.min(prev + 1, 10));
+                
+                } else {
+                    alert('제한 초과')
+                }
+            }
+
+            const handleDecrease = () => {
+                setCount(prev => Math.max(prev - 1, -10));
+            }
+
+            const handleReset = () => {
+                setCount(0);
+            }
+            
+            const handleIncrease5 = () => {
+                if(count < 30) {
+                    setCount(prev => Math.min(prev + 5, 30));
+                
+                } else {
+                    alert('제한 초과')
+                }
+            }
+
+            return (
+                <div className='crad'>
+                    <h1>useState 카운터</h1>
+                    <div className="count">{count}</div>
+                    <div className='row'>
+                        <button onClick={handleDecrease} disabled={count === -10}>-1</button>
+                        <button onClick={handleReset}>Reset</button> 
+                        <button onClick={handleIncrease}>+1</button>
+                        <button onClick={handleIncrease5}>+5</button>
+                        
+                    </div>
+                    {count === 30 && <p style={{color: 'red'}}>최대치입니다 🚫</p>}
+                    {count === -10 && <p style={{color: 'red'}}>최소치입니다 🚫</p>}
+                    <div className='hint'>버튼을 누르면 setCount가 실행되고, 변경된 값으로 자동 렌더링 됩니다.</div>
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Counter />);
+
+    </script>
+</body>
+</html>

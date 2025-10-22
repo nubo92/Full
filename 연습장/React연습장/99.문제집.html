@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #f9fafb; padding: 30px; }
+        .app { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        input { width: 70%; padding: 8px; }
+        button { padding: 8px 12px; margin-left: 6px; }
+        ul { list-style: none; padding: 0; }
+        li { border-bottom: 1px solid #eee; padding: 8px 0; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function App() {
+
+            const [ input, setInput ] = useState;
+            const [ todos, setTodos ] = useState;
+
+            const handleChange = (e) => {
+                setInput(e.target.value);
+            }
+            const handleAdd = () => {
+                if (input.trim() === '') return;
+                setTodos([...todos, input]);
+                setInput(''); 
+            };
+
+            return (
+                <div className='app'>
+                    <h2>할 일 목록</h2>
+                    <input 
+                        type="text"
+                        placeholder='할 일을 입력하세요.'
+                        value={input}
+                        onChange={handleChange}
+                    />
+                    <button onClick={handleAdd}>추가</button>    
+
+                    <ul>
+                        {todos.length === 0 ? (
+                            <p>아직 할 일이 없습니다.</p>
+                        ) : (
+                            todos.map((todo, i) => <li key={i}>{todo}</li>)
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+</body>
+</html>

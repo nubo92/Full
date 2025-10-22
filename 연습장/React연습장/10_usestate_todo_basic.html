@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; background:#f7f7f7; margin:0; padding:40px; }
+        .app { max-width: 420px; margin:0 auto; background:#fff; border:1px solid #e5e7eb; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
+        .header { padding:18px 16px; border-bottom:1px solid #f1f5f9; display:flex; gap:8px; }
+        .header input { flex:1; padding:10px 12px; border:1px solid #d1d5db; border-radius:8px; }
+        .header button { padding:10px 12px; border:1px solid #d1d5db; border-radius:8px; background:#f3f4f6; cursor:pointer; }
+        .header button:hover { background:#e5e7eb; }
+        .list { padding:10px 16px 16px; }
+        .item { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px dashed #eef2f7; }
+        .item:last-child { border-bottom:0; }
+        .item label { flex:1; }
+        .item.completed label { color:#94a3b8; text-decoration:line-through; }
+        .item button { border:1px solid #e5e7eb; background:#fff; padding:6px 10px; border-radius:8px; cursor:pointer; }
+        .item button:hover { background:#f8fafc; }
+        .footer { padding:12px 16px; border-top:1px solid #f1f5f9; color:#64748b; font-size:14px; display:flex; justify-content:space-between; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function TodoItem ({id, text, done, onToggle, onRemove}) {
+            return (
+                <div className={`item ${done ? 'completed' : ''}`}>
+                    <input 
+                        type="checkbox"
+                        checked={done}
+                        onChange={() => onToggle(id)}
+                    />
+                    <label>{text}</label>
+                    <button onClick={() => onRemove(id)}>X</button>    
+                </div>
+            )
+        }
+
+        function App() {
+            const [ input, setInput ] = useState('');
+            const [ todos, setTodos ] = useState([]);
+            const [ nextId, setNextId ] = useState(1);
+
+            const handleChange = (e) => {
+                setInput(e.target.value);
+            }
+
+            const handleAdd = () => {
+                const text = input.trim();
+                if(text === '') return;
+                const newTodo = {id:nextId, text, done: false};
+                
+                setTodos(prev => [...prev, newTodo]);
+                setNextId(prev => prev + 1);
+                setInput('');
+            };
+
+            const handleKeyDown = (e) => {
+                if (e.key === 'Enter') handleAdd();
+            }
+
+            const handleToggle = (id) => {
+                setTodos(prev => 
+                    prev.map(t => t.id === id ? {...t, done: !t.done} : t)
+                );
+            };
+
+            const handleRemove = (id) => {
+                setTodos(prev => prev.filter(t => t.id !== id));
+            }
+
+            const leftCount = todos.filter(t => !t.done).length;
+
+            return (
+                <div className='app'>
+                    <div className='header'>
+                        <input 
+                            placeholder='할 일을 입력하고 Enter'
+                            value={input}
+                            onChange={handleChange}
+                            onKeyDown={handleKeyDown}
+                        />
+                        <button onClick={handleAdd}>추가</button>
+                    </div>
+
+                    <div className='list'>
+                        {todos.length === 0 && <p style={{color:'#94a3b8'}}>할 일이 비어 있어요</p>}
+                        {todos.map(todo => (
+                            <TodoItem
+                                key={todo.id}
+                                id={todo.id}
+                                text={todo.text}
+                                done={todo.done}
+                                onToggle={handleToggle}
+                                onRemove={handleRemove}
+                            />
+                        ))}
+                    </div>
+
+                    <div className='footer'>
+                        <span>남은 일: {leftCount}개</span>
+                        <span>전체: {todos.length}개</span>
+                    </div>
+                </div>
+            )
+
+        }
+
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+</body>
+</html>
