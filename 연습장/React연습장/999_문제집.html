@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function Child({ name, onChangeName, disabled   }) {
+            return (
+                <div>
+                    <p>안녕, 나는 {name}이야!</p>
+                    <button onClick={onChangeName} disabled={disabled}>이름 바꾸기</button>    
+                </div>
+            )
+        }
+
+        function Parent() {
+            const [name, setName] = useState('홍길동');
+            const [input, setInput] = useState('');
+
+            const handleChange = (e) => {
+                setInput(e.target.value)
+            };
+
+            const handleChangeName = () => {
+                const text = input.trim();
+
+                if(!text) {
+                    alert('이름을 입력하세요!')
+                    return;}
+
+                if (name === text) {
+                    alert('현재 이름과 같습니다.')
+                    return;}
+                
+
+                setName(text);
+                setInput('');
+            }
+
+            const handleKeyDown = (e) => {
+                if (e.key === 'Enter') handleChangeName();
+            }
+
+            const isDisabled = !input.trim() || input.trim() === name;
+
+            return(
+                <div>
+                    <h1>부모 컨포넌트</h1>
+                    <input
+                        type='text'
+                        value={input}
+                        onChange={handleChange}
+                        placeholder='바꿀 이름을 입력하세요!'
+                        onKeyDown={handleKeyDown}
+                    /> 
+                    <Child  
+                        name={name} 
+                        onChangeName={handleChangeName} 
+                        disabled={isDisabled}
+                    />
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Parent />);
+
+    </script>
+</body>
+</html>

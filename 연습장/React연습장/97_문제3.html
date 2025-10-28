@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState } = React;
+
+        function App() {
+            const [ input, setInput ] = useState('');
+            const [ todos, setTodos ] = useState([]);
+            const [ nextId, setNextId ] = useState(1);
+
+            const handleAdd = () => {
+                const text = input.trim();
+                if(!text) return;
+
+                setTodos((prev) => [...prev, { id: nextId, text: text}]);
+                setNextId((n) => n + 1);
+                setInput('');
+            }
+
+            const handleRemove = (id) => {
+                setTodos((prev) => prev.filter((t) => t.id !== id));
+            }
+
+            return(
+                <div>
+                    <h2>삭제 기능 연습</h2>
+                    
+                    <input 
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder = '할 일을 입력하세요'
+                        />
+                    <button onClick={handleAdd}>추가</button>
+
+
+                    <ul>
+                        {todos.map((t) => (
+                            <li key={t.id}>
+                                {t.text}
+                                <button onClick={() => handleRemove(t.id)}>삭제</button>
+                            </li>
+                        ))}    
+                    </ul>
+                    <p>당신이 입력한 글자: {input}</p>
+                    <p>당신이 입력한 글자 수: {input.length}</p>
+                </div>
+            )
+        }
+
+
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+</body>
+</html>
