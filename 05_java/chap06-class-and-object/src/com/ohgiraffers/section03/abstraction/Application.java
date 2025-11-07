@@ -19,6 +19,7 @@ public class Application {
             System.out.println("9. 프로그램 종료");
             System.out.print("메뉴 선택 : ");
             int no = sc.nextInt();
+            String a = sc.nextLine();
 
             switch (no) {
                 // 사동자는 카레이서 '요청' 한다.
