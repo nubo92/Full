@@ -1,0 +1,20 @@
+package com.ohgiraffers.section02.initdestroy.annotation;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Owner {
+
+    @PostConstruct      // initMethod와 같은 역활
+    public void openShop() {
+        System.out.println("가게 문을 열었습니다. 이제 쇼핑을 하실 수 있습니다.");
+    }
+
+    @PreDestroy         // destroyMethod와 같은 역활
+    public void closeShop() {
+        System.out.println("가게 문을 닫습니다. 이제 쇼핑을 하실 수 없습니다.");
+    }
+
+}
