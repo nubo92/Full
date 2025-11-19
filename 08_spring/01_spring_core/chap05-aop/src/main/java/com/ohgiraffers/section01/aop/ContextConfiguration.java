@@ -7,7 +7,4 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 /* aspectj의 autoProxy 사용에 관한 설정을 해주어야 advice가 동작한다. */
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class ContextConfiguration {
-
-
-
 }

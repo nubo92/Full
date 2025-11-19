@@ -4,19 +4,17 @@ import com.ohgiraffers.common.Beverage;
 import com.ohgiraffers.common.Bread;
 import com.ohgiraffers.common.Product;
 import com.ohgiraffers.common.ShoppingCart;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Application {
     public static void main(String[] args) {
 
+        ApplicationContext context
+                = new AnnotationConfigApplicationContext(ContextConfiguration.class);
 
-
-        ApplicationContext context = new AnnotationConfigApplicationContext(ContextConfiguration.class);
-
-        String[] beanNAmes = context.getBeanDefinitionNames();
-        for (String beanName : beanNAmes) {
+        String[] beanNames = context.getBeanDefinitionNames();
+        for(String beanName : beanNames) {
             System.out.println(beanName);
         }
 
@@ -28,16 +26,15 @@ public class Application {
         cart1.addItem(carpBread);
         cart1.addItem(milk);
 
-        System.out.println("car1 : " + cart1.getItems());
+        System.out.println("cart1 : " + cart1.getItems());
 
         ShoppingCart cart2 = context.getBean("cart", ShoppingCart.class);
         cart2.addItem(water);
 
         System.out.println("cart2 : " + cart2.getItems());
 
-        /* destory 메소드는 빈 객체 소멸 시점에 동작하므로 컨테이너가 종료 되어야 확인 가능하다. */
+
+        /* destroy 메소드는 빈 객체 소멸 시점에 동작하므로 컨테이너가 종료 되어야 확인 가능하다. */
         ((AnnotationConfigApplicationContext)context).close();
-
-
     }
 }

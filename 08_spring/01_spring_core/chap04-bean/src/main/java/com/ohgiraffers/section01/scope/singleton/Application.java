@@ -10,10 +10,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Application {
     public static void main(String[] args) {
 
-        ApplicationContext context = new AnnotationConfigApplicationContext(ContextConfiguration.class);
+        ApplicationContext context
+                = new AnnotationConfigApplicationContext(ContextConfiguration.class);
 
-        String[] beanNAmes = context.getBeanDefinitionNames();
-        for (String beanName : beanNAmes) {
+        String[] beanNames = context.getBeanDefinitionNames();
+        for(String beanName : beanNames) {
             System.out.println(beanName);
         }
 
@@ -25,7 +26,7 @@ public class Application {
         cart1.addItem(carpBread);
         cart1.addItem(milk);
 
-        System.out.println("car1 : " + cart1.getItems());
+        System.out.println("cart1 : " + cart1.getItems());
 
         ShoppingCart cart2 = context.getBean("cart", ShoppingCart.class);
         cart2.addItem(water);
@@ -35,7 +36,7 @@ public class Application {
         System.out.println("cart1 해시코드 : " + cart1.hashCode());
         System.out.println("cart2 해시코드 : " + cart2.hashCode());
 
-        /* Bean의 기본 스코프는 singletondlek.
+        /*  Bean의 기본 스코프는 singleton이다.
         * singleton 스코프를 갖는 bean은 어플리케이션 내에서 유일한 인스턴스를 갖는다.
         * */
     }

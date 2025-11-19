@@ -15,12 +15,12 @@ public class ContextConfiguration {
 
     @Bean
     public Product carpBread() {
-        return  new Bread("붕어빵", 1000, new Date());
+        return new Bread("붕어빵", 1000, new Date());
     }
 
     @Bean
     public Product milk() {
-        return new Beverage("딸기우유" , 1500, 500);
+        return new Beverage("딸기우유", 1500, 500);
     }
 
     @Bean
@@ -29,7 +29,7 @@ public class ContextConfiguration {
     }
 
     @Bean
-    /* prototype으로 설정된 bean은 getBean()으로 호출될 때마가 새로운 인스턴스를 만들어 반환한다. */
+    /* prototype으로 설정된 Bean은 getBean()으로 호출될 때마다 새로운 인스턴스를 만들어 반환한다. */
     @Scope("prototype")
     public ShoppingCart cart() {
         return new ShoppingCart();

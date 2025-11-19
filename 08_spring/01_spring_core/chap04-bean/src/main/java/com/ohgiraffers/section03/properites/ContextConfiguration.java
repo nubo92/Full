@@ -7,18 +7,19 @@ import com.ohgiraffers.common.ShoppingCart;
 import com.ohgiraffers.section02.initdestroy.annotation.Owner;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.Date;
 
-/* resoirces 하위 경로 기술 */
-@PropertySource("section03/propertise/product-info.properties")
+/* resources 하위 경로 기술 */
+@PropertySource("section03/properties/product-info.properties")
 @Configuration
 public class ContextConfiguration {
 
     /* 치환자(placeholder)문법을 이용하여 properties에 저장된 key를 입력하면 value를 꺼내온다. */
-    @Value("${bread.carpbread.nema}")
+    @Value("${bread.carpbread.name}")
     private String carpBreadName;
     @Value("${bread.carpbread.price}")
     private int carpBreadPrice;
@@ -31,29 +32,29 @@ public class ContextConfiguration {
 
     @Bean
     public Product carpBread() {
-        return  new Bread(carpBreadName, carpBreadPrice, new Date());
+        return new Bread(carpBreadName, carpBreadPrice, new Date());
     }
 
     @Bean
     public Product milk() {
-        return new Beverage(milkName , milkPrice, milkCapacity);
+        return new Beverage(milkName, milkPrice, milkCapacity);
     }
 
-    // 메소드의 ㅏ파라미터에 값 주입
+    // 메소드의 파라미터에 값 주입
     @Bean
-    public Product water(@Value("${beverage.water.name}") String waterNAme,
+    public Product water(@Value("${beverage.water.name}") String waterName,
                          @Value("${beverage.water.price}") int waterPrice,
-                         @Value("${beverage.water.capacitry}") int waterCapacity) {
-        return new Beverage(waterNAme, waterPrice, waterCapacity);
+                         @Value("${beverage.water.capacity}") int waterCapacity) {
+        return new Beverage(waterName, waterPrice, waterCapacity);
     }
 
     @Bean
-    public ShoppingCart cart() { return new ShoppingCart(); }
+    public ShoppingCart cart() {
+        return new ShoppingCart();
+    }
 
     @Bean(initMethod = "openShop", destroyMethod = "closeShop")
     public Owner owner() {
         return new Owner();
     }
-
-
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Bread extends Product{
 
-    private java.util.Date bakedDate;   // 생산 시간
+    private java.util.Date bakedDate;   // 생산시간
 
     public Bread() {
         super();

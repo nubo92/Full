@@ -24,11 +24,11 @@ public class PokemonService {
 //        }
 //    }
 
-    /* 2. Map 티입으로 주입*/
+    /* 2. Map 타입으로 주입 */
     private Map<String, Pokemon> pokemonMap;
 
     @Autowired
-    public  PokemonService(Map<String, Pokemon> pokemonMap) {
+    public PokemonService(Map<String, Pokemon> pokemonMap){
         this.pokemonMap = pokemonMap;
     }
 
@@ -39,5 +39,4 @@ public class PokemonService {
             v.attack();
         });
     }
-
 }

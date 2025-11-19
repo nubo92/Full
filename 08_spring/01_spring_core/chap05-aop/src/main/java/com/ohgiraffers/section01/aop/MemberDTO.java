@@ -1,7 +1,5 @@
 package com.ohgiraffers.section01.aop;
 
-import java.sql.Struct;
-
 public class MemberDTO {
 
     private Long id;

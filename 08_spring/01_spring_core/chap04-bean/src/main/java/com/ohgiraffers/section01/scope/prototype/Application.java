@@ -10,10 +10,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Application {
     public static void main(String[] args) {
 
-        ApplicationContext context = new AnnotationConfigApplicationContext(ContextConfiguration.class);
+        ApplicationContext context
+                = new AnnotationConfigApplicationContext(ContextConfiguration.class);
 
-        String[] beanNAmes = context.getBeanDefinitionNames();
-        for (String beanName : beanNAmes) {
+        String[] beanNames = context.getBeanDefinitionNames();
+        for(String beanName : beanNames) {
             System.out.println(beanName);
         }
 
@@ -25,7 +26,7 @@ public class Application {
         cart1.addItem(carpBread);
         cart1.addItem(milk);
 
-        System.out.println("car1 : " + cart1.getItems());
+        System.out.println("cart1 : " + cart1.getItems());
 
         ShoppingCart cart2 = context.getBean("cart", ShoppingCart.class);
         cart2.addItem(water);

@@ -1,12 +1,11 @@
 package com.ohgiraffers.section01.aop;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Service        // DAO를 호출해서 사용할 비지니스로직을 작성할 클래스
+@Service    // DAO를 호출해서 사용할 비지니스로직을 작성할 클래스
 public class MemberService {
 
     private final MemberDAO memberDAO;

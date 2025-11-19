@@ -16,12 +16,12 @@ public class ContextConfiguration {
 
     @Bean
     public Product carpBread() {
-        return  new Bread("붕어빵", 1000, new Date());
+        return new Bread("붕어빵", 1000, new Date());
     }
 
     @Bean
     public Product milk() {
-        return new Beverage("딸기우유" , 1500, 500);
+        return new Beverage("딸기우유", 1500, 500);
     }
 
     @Bean
@@ -30,12 +30,12 @@ public class ContextConfiguration {
     }
 
     @Bean
-    public ShoppingCart cart() { return new ShoppingCart(); }
-
-    @Bean(initMethod = "openShop", destroyMethod = "closeShop")
-    public  Owner owner() {
-        return new Owner();
+    public ShoppingCart cart() {
+        return new ShoppingCart();
     }
 
-
+    @Bean(initMethod = "openShop", destroyMethod = "closeShop")
+    public Owner owner() {
+        return new Owner();
+    }
 }
